@@ -9,8 +9,8 @@ app.use(express.json());
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'surya@gkdtechsolutions.com',
-        pass: 'your-app-password'
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -18,8 +18,8 @@ app.post('/sendEmail', async (req, res) => {
     const { name, email, message, type } = req.body;
     
     const mailOptions = {
-        from: 'surya@gkdtechsolutions.com',
-        to: 'surya@gkdtechsolutions.com',
+        from: process.env.EMAIL_USER,
+        to: process.env.EMAIL_USER,
         subject: type === 'contact' ? 
             `New Contact Form Submission from ${name}` : 
             `New Build/Repair Service Request from ${name}`,
